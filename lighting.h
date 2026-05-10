@@ -1,0 +1,15 @@
+#ifndef LIGHTING_H
+#define LIGHTING_H
+
+#include <sunset.h>
+#include "rtc.h"
+
+extern int lastSyncedDay;
+
+extern SunSet sun;
+
+void lighting_Init();
+void calculateLightingNeeds(DateTime now);
+void controlLighting(DateTime now);
+
+#endif
