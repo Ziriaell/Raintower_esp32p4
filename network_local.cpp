@@ -1,5 +1,4 @@
 #include "network_local.h"
-// #include "mqtt.h"
 #include "logger.h"
 #include "config.h"
 
@@ -84,8 +83,8 @@ bool check_Wifi() {
   Serial.print("Проверка подключения к Wi-Fi ");
   //   logInfo("Подключение к Wi-Fi");
   uint8_t attempts = 0;
-  while (WiFi.status() != WL_CONNECTED && attempts < 40) {
-    delay(100);
+  while (WiFi.status() != WL_CONNECTED && attempts < 100) {
+    delay(200);
     Serial.println(".");
     attempts++;
   }
@@ -103,7 +102,7 @@ bool check_Wifi() {
 
 extern void mqtt_Reconnect();
 
-void networkLoop() {
+void network_Loop() {
 
     int nowIf = getActiveInterface();
 

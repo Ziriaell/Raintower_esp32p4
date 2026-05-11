@@ -1,0 +1,24 @@
+profiles:
+  profile:
+    fqbn: esp32:esp32:esp32p4:UploadSpeed=921600,USBMode=default,CDCOnBoot=default,MSCOnBoot=default,DFUOnBoot=default,UploadMode=default,FlashFreq=80,FlashMode=qio,FlashSize=4M,PartitionScheme=default,DebugLevel=none,PSRAM=disabled,EraseFlash=none,JTAGAdapter=default,ChipVariant=prev3
+    platforms:
+      - platform: esp32:esp32 (3.3.8)
+    libraries:
+      - PubSubClient (2.8)
+      - RTClib (2.1.4)
+      - Adafruit BusIO (1.17.4)
+      - sunset (1.1.7)
+      - OneWireNg (0.14.1)
+      - NTPClient (3.2.1)
+      - iarduino_I2C_TDS (1.3.3)
+      - iarduino_I2C_pH (1.2.3)
+      - Adafruit AHT10 (0.1.0)
+      - Adafruit Unified Sensor (1.1.15)
+    programmer: ""
+    port: 192.168.1.25
+    port_config:
+      baudrate: "115200"
+      bits: "8"
+      parity: none
+      stop_bits: one
+default_profile: profile

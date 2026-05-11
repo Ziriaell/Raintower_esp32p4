@@ -9,7 +9,7 @@
 
 bool ethernet_Init();
 bool check_Wifi();
-void networkLoop();
+void network_Loop();
 
 // bool isWifiConnected();
 // bool isEthConnected();
