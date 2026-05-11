@@ -1,7 +1,7 @@
 #include "mqtt.h"
 #include "logger.h"
 
-WiFiClient network_Client;
+NetworkClient network_Client;
 PubSubClient mqtt_client(network_Client);
 
 static unsigned long lastReconnectAttempt = 0;
@@ -50,13 +50,4 @@ void mqtt_Reconnect() {
 
         logError(buf);
     }
-}
-
-void mqtt_Loop() {
-
-    if (!mqtt_client.connected()) {
-        mqtt_Reconnect();
-    }
-
-    mqtt_client.loop();
 }

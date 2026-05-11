@@ -10,6 +10,5 @@ extern PubSubClient mqtt_client;
 
 void mqtt_Init();
 void mqtt_Reconnect();
-void mqtt_Loop();
 
 #endif

@@ -81,7 +81,7 @@ bool ethernet_Init() {
 
 bool check_Wifi() {
   Serial.print("Проверка подключения к Wi-Fi ");
-  //   logInfo("Подключение к Wi-Fi");
+    logInfo("Проверка подключения к Wi-Fi");
   uint8_t attempts = 0;
   while (WiFi.status() != WL_CONNECTED && attempts < 100) {
     delay(200);

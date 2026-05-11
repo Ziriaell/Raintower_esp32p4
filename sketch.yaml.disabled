@@ -1,5 +1,5 @@
 profiles:
-  profile:
+  Raintower_profile:
     fqbn: esp32:esp32:esp32p4:UploadSpeed=921600,USBMode=default,CDCOnBoot=default,MSCOnBoot=default,DFUOnBoot=default,UploadMode=default,FlashFreq=80,FlashMode=qio,FlashSize=4M,PartitionScheme=default,DebugLevel=none,PSRAM=disabled,EraseFlash=none,JTAGAdapter=default,ChipVariant=prev3
     platforms:
       - platform: esp32:esp32 (3.3.8)
@@ -21,4 +21,3 @@ profiles:
       bits: "8"
       parity: none
       stop_bits: one
-default_profile: profile

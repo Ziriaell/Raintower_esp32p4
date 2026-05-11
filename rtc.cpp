@@ -9,7 +9,7 @@ bool rtcAvailable = true;
 unsigned long lastNtpMillis = 0;
 
 DateTime lastNtpTime;
-static WiFiUDP ntpUDP;
+static NetworkUDP ntpUDP;
 static RTC_DS3231 rtc;
 static NTPClient timeClient(ntpUDP, "pool.ntp.org", TIMEZONE * 3600);
 
@@ -33,7 +33,9 @@ void syncRTCwithNTP() {
     timeClient.begin();
     if (timeClient.forceUpdate()) {
       unsigned long epochTime = timeClient.getEpochTime();
-      rtc.adjust(DateTime(epochTime));
+      if (rtcAvailable) {
+        rtc.adjust(DateTime(epochTime));
+      }
       Serial.println("Часы синхронизированны с NTP");
       logInfo("Часы синхронизированны с NTP");
     } else {
@@ -43,8 +45,8 @@ void syncRTCwithNTP() {
   }
 }
 
-void set_Rtc(){
-    if (!rtcAvailable) {
+void set_Rtc() {
+  if (!rtcAvailable) {
     // Initialize NTP and get initial time
     if (check_Wifi()) {
       timeClient.begin();
@@ -61,8 +63,10 @@ void set_Rtc(){
   }
 
   if (rtcAvailable) {
-    DateTime now = rtc.now();
     syncRTCwithNTP();
+
+    DateTime now = rtc.now();
+
     Serial.printf("Текущее время RTC: %04d-%02d-%02d %02d:%02d:%02d\n",
                   now.year(), now.month(), now.day(),
                   now.hour(), now.minute(), now.second());
@@ -73,5 +77,13 @@ void set_Rtc(){
   }
 }
 DateTime getNow() {
-  return rtc.now();
+
+  if (rtcAvailable) {
+    return rtc.now();
+  }
+
+  unsigned long elapsed =
+    (millis() - lastNtpMillis) / 1000;
+
+  return lastNtpTime + TimeSpan(elapsed);
 }
