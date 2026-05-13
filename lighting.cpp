@@ -16,6 +16,30 @@ void lighting_Init() {
   sun.setPosition(LATITUDE, LONGITUDE, TIMEZONE);
 }
 
+// static void logLightEvent(const char* state, DateTime now)
+// {
+//     char filename[32];
+//     char line[80];
+
+//     // создаём папку (один раз — но можно вызывать безопасно каждый раз)
+//     ensureDir("/logs");
+
+//     // имя файла: /logs/YYYY-MM-DD.log
+//     snprintf(filename, sizeof(filename),
+//         "/logs/%04d-%02d-%02d.log",
+//         now.year(), now.month(), now.day()
+//     );
+
+//     // строка события
+//     snprintf(line, sizeof(line),
+//         "%02d:%02d:%02d - LIGHT %s\n",
+//         now.hour(), now.minute(), now.second(),
+//         state
+//     );
+
+//     appendFile(filename, line);
+// }
+
 void calculateLightingNeeds(DateTime now) {
   sun.setCurrentDate(now.year(), now.month(), now.day());
   float sunrise = sun.calcSunrise();

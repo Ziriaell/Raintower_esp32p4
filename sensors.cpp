@@ -52,13 +52,13 @@ void sensors_Init() {
   Serial.println("TDS инициализирован");
   logInfo("TDS инициализирован");
 
-  if (!aht.begin()) {
+ if (!aht.begin()) {
     Serial.println("Не найден AHT10");
     logError("Не найден AHT10");
-    while (1) delay(10);
-  }
-  Serial.println("AHT10 инициализирован");
-  logInfo("AHT10 инициализирован");
+} else {
+    Serial.println("AHT10 инициализирован");
+    logInfo("AHT10 инициализирован");
+}
   // Optional: force resync even if power not lost
   // syncRTCwithNTP();
   Serial.println("Инициализация датчиков окончена");

@@ -10,6 +10,24 @@ void mqtt_Init(){
   mqtt_client.setServer(MQTT_SERVER, MQTT_PORT);
 }
 
+// void mqtt_Reconnect() {
+//   while (!mqtt_client.connected()) {
+//     check_Wifi();
+//     Serial.print("Подключение к MQTT серверу...");
+//     logInfo("Подключение к MQTT серверу...");
+//     if (mqtt_client.connect(MQTT_CLIENT_ID, MQTT_USER, MQTT_PASSWORD)) {
+//       Serial.println("Подключено");
+//       logInfo("Подключено");
+//     } else {
+//       Serial.print("не удалось подключиться, rc=");
+//       logError("не удалось подключиться!");
+//       Serial.print(mqtt_client.state());
+//       Serial.println(" попытка подключени через 5 секунд");
+//       logError(" попытка подключени через 5 секунд");
+//       delay(5000);
+//     }
+//   }
+// }
 
 void mqtt_Reconnect() {
 
@@ -50,4 +68,13 @@ void mqtt_Reconnect() {
 
         logError(buf);
     }
+}
+
+void mqtt_Loop() {
+
+    if (!mqtt_client.connected()) {
+        mqtt_Reconnect();
+    }
+
+    mqtt_client.loop();
 }

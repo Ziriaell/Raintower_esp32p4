@@ -45,8 +45,8 @@ void syncRTCwithNTP() {
   }
 }
 
-void set_Rtc() {
-  if (!rtcAvailable) {
+void set_Rtc(){
+    if (!rtcAvailable) {
     // Initialize NTP and get initial time
     if (check_Wifi()) {
       timeClient.begin();
@@ -64,9 +64,7 @@ void set_Rtc() {
 
   if (rtcAvailable) {
     syncRTCwithNTP();
-
     DateTime now = rtc.now();
-
     Serial.printf("Текущее время RTC: %04d-%02d-%02d %02d:%02d:%02d\n",
                   now.year(), now.month(), now.day(),
                   now.hour(), now.minute(), now.second());

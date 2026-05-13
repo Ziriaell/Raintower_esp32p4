@@ -1,4 +1,5 @@
 #include "network_local.h"
+#include "mqtt.h"
 #include "logger.h"
 #include "config.h"
 
@@ -7,6 +8,8 @@
 static bool eth_connected = false;
 static int lastIf = 0;
 static unsigned long lastReconnect = 0;
+
+extern void mqtt_Reconnect();
 
 static bool isWifiConnected() {
   return WiFi.status() == WL_CONNECTED;
@@ -74,6 +77,7 @@ bool ethernet_Init() {
   pinMode(ETH_PHY_POWER, OUTPUT);
   digitalWrite(ETH_PHY_POWER, HIGH);
   delay(100);
+
   ETH.begin();
 
   return true;
@@ -81,10 +85,11 @@ bool ethernet_Init() {
 
 bool check_Wifi() {
   Serial.print("Проверка подключения к Wi-Fi ");
-    logInfo("Проверка подключения к Wi-Fi");
-  uint8_t attempts = 0;
-  while (WiFi.status() != WL_CONNECTED && attempts < 100) {
-    delay(200);
+    logInfo("Проверка подключения к Wi-Fi ");
+  int attempts = 0;
+  while (WiFi.status() != WL_CONNECTED && attempts < 40) {
+  // while (WiFi.status() != WL_CONNECTED) {
+    delay(250);
     Serial.println(".");
     attempts++;
   }
@@ -104,24 +109,24 @@ extern void mqtt_Reconnect();
 
 void network_Loop() {
 
-    int nowIf = getActiveInterface();
+  int nowIf = getActiveInterface();
 
-    if (nowIf != lastIf && lastIf != 0) {
+  if (nowIf != lastIf && lastIf != 0) {
 
-        Serial.println("Сетевой интерфейс изменен");
-        logDebug("Сетевой интерфейс изменен");
+    Serial.println("Сетевой интерфейс изменен");
+    logDebug("Сетевой интерфейс изменен");
 
-        // reconnect только если сеть есть
-        if (nowIf != 0) {
+    // reconnect только если сеть есть
+    if (nowIf != 0) {
 
-            if (millis() - lastReconnect > 5000) {
-                mqtt_Reconnect();
-                lastReconnect = millis();
-            }
-        }
+      if (millis() - lastReconnect > 5000) {
+        mqtt_Reconnect();
+        lastReconnect = millis();
+      }
     }
+  }
 
-    lastIf = nowIf;
+  lastIf = nowIf;
 }
 // bool isNetworkAvailable() {
 //     if (eth_connected) return true;

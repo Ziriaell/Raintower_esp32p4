@@ -1,3 +1,4 @@
+#include "config.h"
 #include "network_local.h"
 #include "mqtt.h"
 #include "sensors.h"
@@ -7,7 +8,6 @@
 #include "SD.h"
 #include "logger.h"
 #include "ota.h"
-#include "config.h"
 
 unsigned long now_millis, lastMsg, lastResetTime = 0;
 const unsigned long resetInterval = 86400000;
@@ -17,30 +17,22 @@ unsigned long lastLightCheck = 0;
 void setup() {
   Serial.begin(115200);
   while (!Serial) {
-    delay(100);
+    delay(500);
   }
-
   if (SD_ENABLE) {
     SD_Init();
   }
 
-  Serial.println("Система запускается");
-  logInfo("Система запускается");
-
-  if (ETH_ENABLE) {
-    ethernet_Init();
-  }
-
-  WiFi.mode(WIFI_STA);
-  WiFi.setAutoReconnect(true);
-  WiFi.persistent(true);
-  WiFi.setSleep(false);
+  Serial.println("Система загружается");
+  logInfo("Система загружается");
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-
   check_Wifi();
   rtc_Init();
   set_Rtc();
   loggerSetRTCReady(true);
+  if (ETH_ENABLE) {
+    ethernet_Init();
+  }
   mqtt_Init();
   ds18b20_Init();
   sensors_Init();
@@ -52,11 +44,13 @@ void setup() {
 }
 
 void loop() {
+  // ArduinoOTA.handle();  // Обработка OTA-запросов
   network_Loop();
-  mqtt_client.loop();
+  mqtt_Loop();
   OTA_Loop();
   now_millis = millis();
   DateTime now;
+
 
   if (rtcAvailable) {
     now = getNow();
@@ -69,9 +63,9 @@ void loop() {
   if (millis() - lastResetTime >= resetInterval) {
     ESP.restart();
   }
-
   if (now_millis - lastMsg > SENDING_INTERVAL_MINUTES * 60000) {
     lastMsg = now_millis;
+    // Указываем текущую температуру жидкости.
     updateSensorData();
     // Serial.print(EC);              // Выводим удельную электропроводность жидкости приведённую к опорной температуре.
     // Serial.print("мСм/см, TDS=");  //

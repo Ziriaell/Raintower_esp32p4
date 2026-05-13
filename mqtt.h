@@ -9,6 +9,7 @@ extern WiFiClient network_Client;
 extern PubSubClient mqtt_client;
 
 void mqtt_Init();
+void mqtt_Loop();
 void mqtt_Reconnect();
 
 #endif
