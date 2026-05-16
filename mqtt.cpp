@@ -8,6 +8,7 @@ static unsigned long lastReconnectAttempt = 0;
 
 void mqtt_Init(){
   mqtt_client.setServer(MQTT_SERVER, MQTT_PORT);
+  mqtt_client.connected();
 }
 
 // void mqtt_Reconnect() {

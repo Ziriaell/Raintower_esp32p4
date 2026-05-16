@@ -8,6 +8,7 @@
 #include "SD.h"
 #include "logger.h"
 #include "ota.h"
+#include "lcd.h"
 
 unsigned long now_millis, lastMsg, lastResetTime = 0;
 const unsigned long resetInterval = 86400000;
@@ -25,8 +26,13 @@ void setup() {
 
   Serial.println("Система загружается");
   logInfo("Система загружается");
+
+  WiFi.mode(WIFI_STA);
+  WiFi.setAutoReconnect(true);
+  WiFi.setSleep(false);
+
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  check_Wifi();
+  waitForWifi();
   rtc_Init();
   set_Rtc();
   loggerSetRTCReady(true);
@@ -132,7 +138,12 @@ void loop() {
       previousDay = now.day();
       lastSyncedDay = -1;
     }
-
+    // Weekly NTP sync on Sunday
+    if (now.dayOfTheWeek() == 0 && lastSyncedDay != now.day()) {
+      Serial.println("📅 Sunday sync");
+      syncRTCwithNTP();
+      lastSyncedDay = now.day();
+    }
     // Daily sunrise/sunset calculations
     static int lastDay = -1;
     if (now.day() != lastDay) {
