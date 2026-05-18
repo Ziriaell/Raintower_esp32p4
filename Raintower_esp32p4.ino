@@ -43,20 +43,21 @@ void setup() {
   ds18b20_Init();
   sensors_Init();
   lighting_Init();
+  lcd_Init();
   OTA_Init();
   Serial.println("Система готова");
   logInfo("Система готова");
+  updateSensorData();
   Serial.println("============================================");
 }
 
 void loop() {
-  // ArduinoOTA.handle();  // Обработка OTA-запросов
   network_Loop();
   mqtt_Loop();
   OTA_Loop();
+  lcd_Loop();
   now_millis = millis();
   DateTime now;
-
 
   if (rtcAvailable) {
     now = getNow();
@@ -141,6 +142,7 @@ void loop() {
     // Weekly NTP sync on Sunday
     if (now.dayOfTheWeek() == 0 && lastSyncedDay != now.day()) {
       Serial.println("📅 Sunday sync");
+      logInfo("Воскресная синхронизация времени");
       syncRTCwithNTP();
       lastSyncedDay = now.day();
     }

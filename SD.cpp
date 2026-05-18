@@ -36,11 +36,3 @@ bool SD_Init() {
 
   return true;
 }
-
-// void logToSD(const char* tag, String message) {
-//   File file = SD_MMC.open("/log.txt", FILE_APPEND);
-//   if (!file) return;
-
-//   file.printf("[%lu][%s] %s\n", millis(), tag, message.c_str());
-//   file.close();
-// }

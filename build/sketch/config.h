@@ -56,12 +56,18 @@
 #define REQUIRED_LIGHT_MINUTES    14 * 60
 // Количество измерений для усреднения значения
 #define NUM_READ                  30
+// Интервал обновления экрана
+#define LCD_UPDATE_INTERVAL 1000 // 1 секунда
+// Интервал смены страниц на экране
+#define PAGE_SWITCH_INTERVAL 5000
 
-// ==== I2C адреса датчиков ====
+// ==== I2C адреса ====
 // I2C адрес датчика pH
 #define PH_SENSOR_ADDRESS     0x10
 // I2C адрес датчика TDS (соли в воде)
 #define TDS_SENSOR_ADDRESS    0x11
+// I2C адрес экрана
+#define LCD_ADDRESS 0x27
 
 // ==== Задействованные пины ====
 // Пин ds18b20

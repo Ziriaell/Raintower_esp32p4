@@ -84,7 +84,7 @@ bool ethernet_Init() {
 }
 
 bool check_Wifi() {
-    return WiFi.status() == WL_CONNECTED;
+  return WiFi.status() == WL_CONNECTED;
 }
 
 // bool check_Wifi() {
@@ -112,30 +112,30 @@ bool waitForWifi() {
 
   Serial.print("Проверка подключения к Wi-Fi ");
   logInfo("Проверка подключения к Wi-Fi ");
-    uint8_t attempts = 0;
+  uint8_t attempts = 0;
 
-    while (WiFi.status() != WL_CONNECTED &&
-           attempts < 40) {
+  while (WiFi.status() != WL_CONNECTED && attempts < 50) {
 
-        delay(250);
+    delay(250);
 
-        Serial.print(".");
+    Serial.print(".");
 
-        attempts++;
-    }
+    attempts++;
+  }
 
-    if (WiFi.status() == WL_CONNECTED) {
+  if (WiFi.status() == WL_CONNECTED) {
 
     Serial.println("Подключено!");
     logInfo("Подключено!");
 
-        return true;
-    }
-
+    return true;
+  } else {
     Serial.println(" Не удалось подключиться.");
     logError(" Не удалось подключиться.");
     return false;
+  }
 }
+
 
 // ===== МОНИТОРИНГ =====
 
@@ -162,8 +162,3 @@ void network_Loop() {
 
   lastIf = nowIf;
 }
-// bool isNetworkAvailable() {
-//     if (eth_connected) return true;
-//     if (WiFi.isConnected()) return true;
-//     return false;
-// }
