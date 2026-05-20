@@ -5,6 +5,6 @@
 extern float PH, EC, TDS, Water_temperature, Air_temperature, Air_humidity;
 
 void sensors_Init();
-void updateSensorData();
+void sensors_Loop();
 
 #endif
