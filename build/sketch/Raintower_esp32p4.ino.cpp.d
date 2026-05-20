@@ -228,4 +228,5 @@ C:\Users\User\Documents\Repo\Raintower_esp32p4\build\sketch\Raintower_esp32p4.in
  C:\Users\User\Documents\Repo\Raintower_esp32p4\build\sketch\SD.h \
  C:\Users\User\Documents\Repo\Raintower_esp32p4\build\sketch\logger.h \
  C:\Users\User\Documents\Repo\Raintower_esp32p4\build\sketch\ota.h \
- C:\Users\User\Documents\Repo\Raintower_esp32p4\build\sketch\lcd.h
+ C:\Users\User\Documents\Repo\Raintower_esp32p4\build\sketch\lcd.h \
+ C:\Users\User\Documents\Arduino\libraries\LiquidCrystal_PCF8574\src/LiquidCrystal_PCF8574.h

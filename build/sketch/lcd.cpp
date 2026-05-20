@@ -1,6 +1,4 @@
 #line 1 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\lcd.cpp"
-#include <LiquidCrystal_PCF8574.h>
-
 #include "lcd.h"
 #include "rtc.h"
 #include "mqtt.h"
@@ -207,19 +205,6 @@ void lcd_Init() {
 
   // Очистка экрана
   lcd.clear();
-
-  // Тестовый вывод
-  lcd.setCursor(0, 0);
-  lcd.print("RainTower");
-
-  lcd.setCursor(0, 1);
-  lcd.print("System boot...");
-
-  lcd.setCursor(0, 2);
-  lcd.print("LCD2004 OK");
-
-  lcd.setCursor(0, 3);
-  lcd.print("Please wait");
 
   lcdAvailable = true;
 
