@@ -109,35 +109,84 @@ bool check_Wifi() {
 //   }
 // }
 
+// bool waitForWifi() {
+
+//   Serial.print("Проверка подключения к Wi-Fi ");
+//   logInfo("Проверка подключения к Wi-Fi ");
+//   uint8_t attempts = 0;
+
+//   while (WiFi.status() != WL_CONNECTED && attempts < 50) {
+
+//     delay(250);
+
+//     Serial.print(".");
+
+//     attempts++;
+//   }
+
+//   if (WiFi.status() == WL_CONNECTED) {
+
+//     Serial.println("Подключено!");
+//     logInfo("Подключено!");
+
+//     return true;
+//   } else {
+//     Serial.println(" Не удалось подключиться.");
+//     logError(" Не удалось подключиться.");
+//     return false;
+//   }
+// }
 bool waitForWifi() {
 
-  Serial.print("Проверка подключения к Wi-Fi ");
-  logInfo("Проверка подключения к Wi-Fi ");
-  uint8_t attempts = 0;
+  static bool started = false;
+  static unsigned long lastPrint = 0;
+  static uint8_t attempts = 0;
 
-  while (WiFi.status() != WL_CONNECTED && attempts < 50) {
+  if (WiFi.status() == WL_CONNECTED) {
 
-    delay(250);
+    if (started) {
+
+      Serial.println("Подключено!");
+      logInfo("Подключено!");
+
+
+      started = false;
+    }
+
+    return true;
+  }
+
+  if (!started) {
+
+    Serial.print("Проверка подключения к Wi-Fi ");
+    logInfo("Проверка подключения к Wi-Fi ");
+
+    started = true;
+    attempts = 0;
+    lastPrint = millis();
+  }
+
+  if (millis() - lastPrint >= 250) {
 
     Serial.print(".");
+
+    lastPrint = millis();
 
     attempts++;
   }
 
-  if (WiFi.status() == WL_CONNECTED) {
+  if (attempts >= 50) {
 
-    Serial.println("Подключено!");
-    logInfo("Подключено!");
-
-    return true;
-  } else {
     Serial.println(" Не удалось подключиться.");
     logError(" Не удалось подключиться.");
+
+    started = false;
+
     return false;
   }
+
+  return false;
 }
-
-
 // ===== МОНИТОРИНГ =====
 
 extern void mqtt_Reconnect();

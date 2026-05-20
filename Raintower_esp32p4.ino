@@ -47,13 +47,13 @@ void setup() {
   OTA_Init();
   Serial.println("Система готова");
   logInfo("Система готова");
-  updateSensorData();
   Serial.println("============================================");
 }
 
 void loop() {
   network_Loop();
   mqtt_Loop();
+  sensors_Loop();
   OTA_Loop();
   lcd_Loop();
   now_millis = millis();
@@ -67,13 +67,12 @@ void loop() {
     now = lastNtpTime + TimeSpan(secondsSinceSync);
   }
 
-  if (millis() - lastResetTime >= resetInterval) {
-    ESP.restart();
-  }
+  // if (millis() - lastResetTime >= resetInterval) {
+  //   ESP.restart();
+  // }
   if (now_millis - lastMsg > SENDING_INTERVAL_MINUTES * 60000) {
     lastMsg = now_millis;
     // Указываем текущую температуру жидкости.
-    updateSensorData();
     // Serial.print(EC);              // Выводим удельную электропроводность жидкости приведённую к опорной температуре.
     // Serial.print("мСм/см, TDS=");  //
     // Serial.print(TDS);             // Выводим количество растворённых твёрдых веществ в жидкости.
