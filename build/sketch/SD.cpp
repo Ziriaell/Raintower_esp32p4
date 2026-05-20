@@ -7,7 +7,7 @@
 
 bool SD_Init() {
   Serial.println("Инициализация SD-карты");
-  // logInfo("Инициализация SD-карты");
+  logInfo("Инициализация SD-карты");
 
   // Включаем питание карты
   pinMode(SD_POWER_PIN, OUTPUT);

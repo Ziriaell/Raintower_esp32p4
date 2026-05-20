@@ -5,8 +5,6 @@
 #include <WiFi.h>
 #include <WiFiUdp.h>
 
-// extern bool eth_connected;
-
 bool ethernet_Init();
 bool check_Wifi();
 void network_Loop();
@@ -14,8 +12,5 @@ bool waitForWifi();
 
 bool isWifiConnected();
 bool isEthConnected();
-// bool isNetworkReady();
-// int getActiveInterface();
-// bool isNetworkAvailable();
-// void onEvent(arduino_event_id_t event);
+
 #endif

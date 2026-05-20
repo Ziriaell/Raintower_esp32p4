@@ -179,7 +179,7 @@ void sensors_Loop() {
     return;
   }
 
-  // ===== NORMAL SENSOR UPDATE =====
+  // ===== СТАНДАРТНОЕ ОБНОВЛЕНИЕ ДАТЧИКОВ =====
 
   if (millis() - lastSensorUpdate >= SENSOR_UPDATE_INTERVAL) {
 
