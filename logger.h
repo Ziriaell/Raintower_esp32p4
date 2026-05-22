@@ -3,8 +3,12 @@
 
 #include <Arduino.h>
 
-void logger_init();
+
+bool logger_Init();
+void logger_Close();
+
 void loggerSetRTCReady(bool ready);
+
 void logInfo(const String& msg);
 void logError(const String& msg);
 void logDebug(const String& msg);

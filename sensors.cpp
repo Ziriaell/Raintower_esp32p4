@@ -55,8 +55,7 @@ public:
 
     if (NUM_READ % 2 == 0) {
 
-      return (sorted[NUM_READ / 2 - 1] +
-              sorted[NUM_READ / 2]) / 2.0;
+      return (sorted[NUM_READ / 2 - 1] + sorted[NUM_READ / 2]) / 2.0;
 
     } else {
 
@@ -77,11 +76,11 @@ static unsigned long lastInitRead = 0;
 
 const uint16_t INIT_READS = NUM_READ * 2;
 
-const uint32_t INIT_INTERVAL = 100;
+const uint32_t INIT_INTERVAL = 200;
 
 static unsigned long lastSensorUpdate = 0;
 
-const uint32_t SENSOR_UPDATE_INTERVAL = 60000;
+// const uint32_t SENSOR_UPDATE_INTERVAL = 10000;
 
 // ===== INIT =====
 
@@ -115,8 +114,8 @@ void sensors_Init() {
   Serial.println("Инициализация датчиков окончена");
   logInfo("Инициализация датчиков окончена");
 
-  Serial.println("Начальное накопление запущено");
-  logInfo("Начальное накопление запущено");
+  // Serial.println("Начальное накопление запущено");
+  // logInfo("Начальное накопление запущено");
 }
 
 // ===== SENSOR UPDATE =====
@@ -131,12 +130,41 @@ static void updateSensorData() {
 
   tds.set_t(Water_temperature);
 
-  PH = medianPH.update(pH.getPH());
+  float phRaw = pH.getPH();
 
-  EC = medianEC.update(tds.getEC());
+  if (!isnan(phRaw) && phRaw >= 0.0 && phRaw <= 14.0) {
 
-  TDS = medianTDS.update(tds.getTDS());
+    PH = medianPH.update(phRaw);
 
+  } else {
+
+    // logError("Ошибка чтения pH");
+    Serial.println("Ошибка чтения pH");
+  }
+
+  float ecRaw = tds.getEC();
+
+  if (!isnan(ecRaw) && ecRaw >= 0.0 && ecRaw <= 20.0) {
+
+    EC = medianEC.update(ecRaw);
+
+  } else {
+
+    logError("Ошибка чтения EC");
+    Serial.println("Ошибка чтения EC");
+  }
+
+  float tdsRaw = tds.getTDS();
+
+  if (!isnan(tdsRaw) && tdsRaw >= 0.0 && tdsRaw <= 10000.0) {
+
+    TDS = medianTDS.update(tdsRaw);
+
+  } else {
+
+    logError("Ошибка чтения TDS");
+    Serial.println("Ошибка чтения TDS");
+  }
   sensors_event_t humidity, temp;
 
   aht.getEvent(&humidity, &temp);
@@ -145,7 +173,6 @@ static void updateSensorData() {
 
   Air_humidity = humidity.relative_humidity;
 }
-
 // ===== MAIN SENSOR LOOP =====
 
 void sensors_Loop() {

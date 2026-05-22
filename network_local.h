@@ -6,11 +6,11 @@
 #include <WiFiUdp.h>
 
 bool ethernet_Init();
-bool check_Wifi();
 void network_Loop();
 bool waitForWifi();
 
 bool isWifiConnected();
 bool isEthConnected();
+bool isNetworkReady();
 
 #endif

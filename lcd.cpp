@@ -1,4 +1,5 @@
 #include "lcd.h"
+#include "SD.h"
 #include "rtc.h"
 #include "mqtt.h"
 #include "network_local.h"
@@ -145,7 +146,7 @@ static void second_page() {
 
   lcd.setCursor(0, 2);
   lcd.print(padLine(
-    "W:" + wifiIp));
+    "WF:" + wifiIp));
 
   String ethIp =
     isEthConnected()
@@ -184,7 +185,7 @@ static void third_page() {
     "Up:" + getUptime()));
 
   String sdState =
-    SD_ENABLE ? "OK" : "OFF";
+    isSDReady() ? "OK" : "FAIL";
 
   lcd.setCursor(0, 3);
   lcd.print(padLine(
@@ -213,42 +214,42 @@ void lcd_Init() {
 
 void lcd_Loop() {
 
-    // LCD не найден
-    if (!lcdAvailable) {
-        return;
+  // LCD не найден
+  if (!lcdAvailable) {
+    return;
+  }
+
+  // Обновление раз в секунду
+  if (millis() - lastLcdUpdate < LCD_UPDATE_INTERVAL) {
+    return;
+  }
+
+  lastLcdUpdate = millis();
+
+  // ===== ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ =====
+  if (millis() - lastPageSwitch >= PAGE_SWITCH_INTERVAL) {
+
+    currentPage++;
+
+    if (currentPage > 2) {
+      currentPage = 0;
     }
 
-    // Обновление раз в секунду
-    if (millis() - lastLcdUpdate < LCD_UPDATE_INTERVAL) {
-        return;
-    }
+    lastPageSwitch = millis();
+  }
 
-    lastLcdUpdate = millis();
+  switch (currentPage) {
 
-    // ===== ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ =====
-    if (millis() - lastPageSwitch >= PAGE_SWITCH_INTERVAL) {
+    case 0:
+      first_page();
+      break;
 
-        currentPage++;
+    case 1:
+      second_page();
+      break;
 
-        if (currentPage > 2) {
-            currentPage = 0;
-        }
-
-        lastPageSwitch = millis();
-    }
-
-    switch (currentPage) {
-
-        case 0:
-            first_page();
-            break;
-
-        case 1:
-            second_page();
-            break;
-
-        case 2:
-            third_page();
-            break;
-    }
+    case 2:
+      third_page();
+      break;
+  }
 }
