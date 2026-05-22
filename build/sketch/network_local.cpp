@@ -20,7 +20,7 @@ bool isEthConnected() {
   return eth_connected;
 }
 
-static bool isNetworkReady() {
+bool isNetworkReady() {
   return isWifiConnected() || isEthConnected();
 }
 
@@ -84,10 +84,6 @@ bool ethernet_Init() {
   return true;
 }
 
-bool check_Wifi() {
-  return WiFi.status() == WL_CONNECTED;
-}
-
 bool waitForWifi() {
 
   Serial.print("Проверка подключения к Wi-Fi ");
@@ -96,7 +92,7 @@ bool waitForWifi() {
 
   while (WiFi.status() != WL_CONNECTED && attempts < 50) {
 
-    delay(250);
+    delay(400);
 
     Serial.print(".");
 

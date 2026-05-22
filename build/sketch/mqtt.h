@@ -6,7 +6,7 @@
 #include "network_local.h"
 #include "config.h"
 
-extern WiFiClient network_Client;
+extern NetworkClient network_Client;
 extern PubSubClient mqtt_client;
 
 void mqtt_Init();

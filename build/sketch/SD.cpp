@@ -5,9 +5,11 @@
 #include "logger.h"
 #include "config.h"
 
+static bool sdAvailable = false;
+
 bool SD_Init() {
   Serial.println("Инициализация SD-карты");
-  logInfo("Инициализация SD-карты");
+  // logInfo("Инициализация SD-карты");
 
   // Включаем питание карты
   pinMode(SD_POWER_PIN, OUTPUT);
@@ -36,4 +38,11 @@ bool SD_Init() {
   logInfo("SD-карта инициализирована");
 
   return true;
+}
+bool isSDReady() {
+
+    if (!sdAvailable)
+        return false;
+
+    return SD_MMC.cardType() != CARD_NONE;
 }

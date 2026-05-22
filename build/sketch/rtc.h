@@ -11,6 +11,7 @@ extern DateTime lastNtpTime;
 void rtc_Init();
 void set_Rtc();
 void syncRTCwithNTP();
+bool isTimeValid();
 DateTime getNow();
 
 #endif

@@ -164,6 +164,7 @@ C:\Users\User\Documents\Repo\Raintower_esp32p4\build\sketch\lcd.cpp.o: \
  C:\Users\User\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/esp32-hal-log.h \
  C:\Users\User\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/HardwareI2C.h \
  C:\Users\User\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Print.h \
+ C:\Users\User\Documents\Repo\Raintower_esp32p4\build\sketch\SD.h \
  C:\Users\User\Documents\Repo\Raintower_esp32p4\build\sketch\rtc.h \
  C:\Users\User\Documents\Arduino\libraries\RTClib\src/RTClib.h \
  C:\Users\User\Documents\Arduino\libraries\Adafruit_BusIO/Adafruit_I2CDevice.h \

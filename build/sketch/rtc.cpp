@@ -7,7 +7,10 @@
 #include "config.h"
 
 bool rtcAvailable = true;
+static bool timeValid = false;
+
 unsigned long lastNtpMillis = 0;
+
 
 DateTime lastNtpTime;
 static NetworkUDP ntpUDP;
@@ -21,6 +24,8 @@ void rtc_Init() {
     logInfo("RTC не доступно, используем NTP.");
     rtcAvailable = false;
   } else {
+    timeValid = true;
+    loggerSetRTCReady(true);
     if (rtc.lostPower()) {
       Serial.println("RTC было некорректно выключено. Синхронизация времени.");
       logError("RTC было некорректно выключено. Синхронизация времени.");
@@ -29,14 +34,22 @@ void rtc_Init() {
   }
 }
 
+bool isTimeValid() {
+  return timeValid;
+}
+
 void syncRTCwithNTP() {
-  if (check_Wifi()) {
+  if (isNetworkReady()) {
     timeClient.begin();
     if (timeClient.forceUpdate()) {
       unsigned long epochTime = timeClient.getEpochTime();
+      lastNtpTime = DateTime(epochTime);
+      lastNtpMillis = millis();
       if (rtcAvailable) {
         rtc.adjust(DateTime(epochTime));
       }
+      timeValid = true;
+      loggerSetRTCReady(true);
       Serial.println("Часы синхронизированны с NTP");
       logInfo("Часы синхронизированны с NTP");
     } else {
@@ -46,16 +59,18 @@ void syncRTCwithNTP() {
   }
 }
 
-void set_Rtc(){
-    if (!rtcAvailable) {
+void set_Rtc() {
+  if (!rtcAvailable) {
     // Initialize NTP and get initial time
-    if (check_Wifi()) {
+    if (isNetworkReady()) {
       timeClient.begin();
       if (timeClient.forceUpdate()) {
         lastNtpTime = DateTime(timeClient.getEpochTime());
         lastNtpMillis = millis();
         Serial.println("Использование NTP в качестве резервных часов.");
         logInfo("Использование NTP в качестве резервных часов.");
+        timeValid = true;
+        loggerSetRTCReady(true);
       } else {
         Serial.println("Не удалось синхронизироваться с NTP.");
         logInfo("Не удалось синхронизироваться с NTP.");
@@ -64,8 +79,7 @@ void set_Rtc(){
   }
 
   if (rtcAvailable) {
-    syncRTCwithNTP();
-    DateTime now = rtc.now();
+    DateTime now = getNow();
     Serial.printf("Текущее время RTC: %04d-%02d-%02d %02d:%02d:%02d\n",
                   now.year(), now.month(), now.day(),
                   now.hour(), now.minute(), now.second());

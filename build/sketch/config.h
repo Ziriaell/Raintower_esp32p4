@@ -51,7 +51,7 @@
 // Интервал отправки данных в минутах
 #define SENDING_INTERVAL_MINUTES  5
 // Интервал проверки включения освещения 
-#define LIGHT_CHECK_INTERVAL 20000 //10 секунд
+#define LIGHT_CHECK_INTERVAL 20000 //20 секунд
 // Требуемое количество минут освещения в день
 #define REQUIRED_LIGHT_MINUTES    14 * 60
 // Количество измерений для усреднения значения
@@ -60,6 +60,8 @@
 #define LCD_UPDATE_INTERVAL 1000 // 1 секунда
 // Интервал смены страниц на экране
 #define PAGE_SWITCH_INTERVAL 5000
+// Интервал обновления данных датчиков
+#define SENSOR_UPDATE_INTERVAL 10000
 
 // ==== I2C адреса ====
 // I2C адрес датчика pH

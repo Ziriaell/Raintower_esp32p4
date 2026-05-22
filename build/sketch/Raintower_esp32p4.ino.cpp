@@ -19,7 +19,7 @@ unsigned long lastLightCheck = 0;
 
 #line 18 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 void setup();
-#line 59 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\Raintower_esp32p4.ino"
+#line 60 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 void loop();
 #line 18 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 void setup() {
@@ -28,7 +28,9 @@ void setup() {
     delay(500);
   }
   if (SD_ENABLE) {
-    SD_Init();
+    if (SD_Init()) {
+      logger_Init();
+    }
   }
   lcd_Init();
   Serial.println("Система загружается");
@@ -38,7 +40,6 @@ void setup() {
   WiFi.mode(WIFI_STA);
   WiFi.setAutoReconnect(true);
   WiFi.setSleep(false);
-
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   waitForWifi();
   lcd.setCursor(0, 1);
@@ -51,10 +52,10 @@ void setup() {
   }
   lcd.setCursor(0, 2);
   lcd.print("Ethernet started");
-  mqtt_Init();
   ds18b20_Init();
   sensors_Init();
   lighting_Init();
+  mqtt_Init();
   OTA_Init();
   lcd.setCursor(0, 3);
   lcd.print("System ready");

@@ -26,7 +26,7 @@ void mqtt_Reconnect() {
 
     lastReconnectAttempt = millis();
 
-    check_Wifi();
+    isWifiConnected();
 
     Serial.print("Подключение к MQTT серверу...");
     logInfo("Подключение к MQTT серверу...");
