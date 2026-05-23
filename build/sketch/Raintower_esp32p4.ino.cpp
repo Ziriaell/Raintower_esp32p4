@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#line 1 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\Raintower_esp32p4.ino"
+#line 1 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 #include "config.h"
 #include "network_local.h"
 #include "mqtt.h"
@@ -17,11 +17,11 @@ const unsigned long resetInterval = 86400000;
 unsigned long lastLightCheck = 0;
 // const unsigned long rtcRetryInterval = 5UL * 60UL * 1000UL;  // 5 minutes
 
-#line 18 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\Raintower_esp32p4.ino"
+#line 18 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 void setup();
-#line 60 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\Raintower_esp32p4.ino"
+#line 60 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 void loop();
-#line 18 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\Raintower_esp32p4.ino"
+#line 18 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 void setup() {
   Serial.begin(115200);
   while (!Serial) {

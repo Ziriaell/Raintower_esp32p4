@@ -1,4 +1,4 @@
-#line 1 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\ds18b20.cpp"
+#line 1 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\ds18b20.cpp"
 #include "ds18b20.h"
 #include "logger.h"
 #include "config.h"

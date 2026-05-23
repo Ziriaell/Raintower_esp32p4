@@ -1,4 +1,4 @@
-#line 1 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\network_local.h"
+#line 1 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\network_local.h"
 #ifndef NETWORK_H
 #define NETWORK_H
 

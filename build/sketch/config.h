@@ -1,4 +1,4 @@
-#line 1 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\config.h"
+#line 1 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\config.h"
 #ifndef CONFIG_H
 #define CONFIG_H
 

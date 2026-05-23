@@ -1,14 +1,14 @@
-#line 1 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\.vscode\\arduino.json"
+#line 1 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\.vscode\\arduino.json"
 {
   "port": "192.168.1.25",
   "configuration": "UploadSpeed=921600,USBMode=default,CDCOnBoot=default,MSCOnBoot=default,DFUOnBoot=default,UploadMode=default,FlashFreq=80,FlashMode=qio,FlashSize=16M,PartitionScheme=no_fs,DebugLevel=none,PSRAM=enabled,EraseFlash=none,JTAGAdapter=default,ChipVariant=prev3",
   "output": "build",
   "board": "esp32:esp32:esp32p4",
-  "programmer": "esptool",
+  "programmer": "",
   "useProgrammer": false,
   "optimize_for_debug": false,
   "configurationRequired": true,
-  "compile_profile": "Raintower",
+  "compile_profile": "",
   "monitorPortSettings": {
     "port": "192.168.1.25",
     "baudRate": 115200,

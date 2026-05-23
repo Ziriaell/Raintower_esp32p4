@@ -1,4 +1,4 @@
-#line 1 "C:\\Users\\User\\Documents\\Repo\\Raintower_esp32p4\\lighting.h"
+#line 1 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\lighting.h"
 #ifndef LIGHTING_H
 #define LIGHTING_H
 
