@@ -25,23 +25,21 @@ bool SD_Init() {
     Serial.println("Конфигурация контактов SD-карты не верная!");
     logError("Конфигурация контактов SD-карты не верная!");
     return false;
+    sdAvailable = false;
   }
 
   if (!SD_MMC.begin("/sdcard", true)) {  // true = 1-bit mode fallback
     Serial.println("Инициализация SD-карты не удалась!");
     logError("Инициализация SD-карты не удалась!");
     return false;
+    sdAvailable = false;
   }
-
+  
   Serial.println("SD-карта инициализирована");
   logInfo("SD-карта инициализирована");
-
+  sdAvailable = true;
   return true;
 }
 bool isSDReady() {
-
-    if (!sdAvailable)
-        return false;
-
-    return SD_MMC.cardType() != CARD_NONE;
+  return sdAvailable;
 }
