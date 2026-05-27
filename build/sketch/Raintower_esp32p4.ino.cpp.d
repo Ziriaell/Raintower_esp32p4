@@ -229,4 +229,5 @@ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\Rainto
  C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\logger.h \
  C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\ota.h \
  C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\lcd.h \
- C:\Users\Горяйнов\ Александр\Documents\Arduino\libraries\LiquidCrystal_PCF8574\src/LiquidCrystal_PCF8574.h
+ C:\Users\Горяйнов\ Александр\Documents\Arduino\libraries\LiquidCrystal_PCF8574\src/LiquidCrystal_PCF8574.h \
+ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\telemetry.h

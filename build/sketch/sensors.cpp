@@ -169,10 +169,14 @@ static void updateSensorData() {
   sensors_event_t humidity, temp;
 
   aht.getEvent(&humidity, &temp);
+  
+  if (!isnan(temp.temperature)) {
+    Air_temperature = temp.temperature;
+  }
 
-  Air_temperature = temp.temperature;
-
-  Air_humidity = humidity.relative_humidity;
+  if (!isnan(humidity.relative_humidity)) {
+    Air_humidity = humidity.relative_humidity;
+  }
 }
 // ===== MAIN SENSOR LOOP =====
 

@@ -92,9 +92,9 @@
         "-IC:\\Users\\Горяйнов Александр\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\3.3.8\\libraries\\Hash\\src",
         "@C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\build/build_opt.h",
         "@C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\build/file_opts",
-        "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\build\\sketch\\sensors.cpp",
+        "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\build\\sketch\\lcd.cpp",
         "-o",
-        "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\build\\sketch\\sensors.cpp.o"
+        "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\build\\sketch\\lcd.cpp.o"
       ],
       "defines": [
         "F_CPU=360000000L",
