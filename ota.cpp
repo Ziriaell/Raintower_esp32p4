@@ -2,13 +2,14 @@
 
 #include "ota.h"
 #include "logger.h"
+#include "config.h"
 
 void OTA_Init() {
 
-    ArduinoOTA.setHostname("RainTower");
+    ArduinoOTA.setHostname(OTA_HOSTNAME);
 
     // пароль OTA (необязательно)
-    ArduinoOTA.setPassword("123456");
+    ArduinoOTA.setPassword(OTA_PASSWORD);
 
     ArduinoOTA.onStart([]() {
 

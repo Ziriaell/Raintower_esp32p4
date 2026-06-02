@@ -12,17 +12,18 @@
 #include "ota.h"
 #include "lcd.h"
 #include "telemetry.h"
+#include "watchdog.h"
 
 unsigned long now_millis, lastMsg, lastResetTime = 0;
 const unsigned long resetInterval = 86400000;
 unsigned long lastLightCheck = 0;
 // const unsigned long rtcRetryInterval = 5UL * 60UL * 1000UL;  // 5 minutes
 
-#line 19 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
+#line 20 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 void setup();
-#line 61 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
+#line 64 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 void loop();
-#line 19 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
+#line 20 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\Raintower_esp32p4.ino"
 void setup() {
   Serial.begin(115200);
   while (!Serial) {
@@ -62,6 +63,8 @@ void setup() {
   lcd.print("System ready");
   Serial.println("Система готова");
   logInfo("Система готова");
+  watchdog_Init();
+  logResetReason();
   Serial.println("============================================");
 }
 
@@ -108,4 +111,5 @@ void loop() {
     lastLightCheck = now_millis;
     controlLighting(now);
   }
+  watchdog_Reset();
 }

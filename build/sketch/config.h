@@ -86,7 +86,7 @@
 #define TIMEZONE 3 
 
 
-// ==== I2C шина для RTC ====
-#define RTC_SDA  17
-#define RTC_SCL  16
+// // ==== I2C шина для RTC ====
+// #define RTC_SDA  17
+// #define RTC_SCL  16
 #endif

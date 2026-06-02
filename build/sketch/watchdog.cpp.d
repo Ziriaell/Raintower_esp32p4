@@ -1,15 +1,16 @@
-C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\Raintower_esp32p4.ino.cpp.o: \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\Raintower_esp32p4.ino.cpp \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Arduino.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/newlib/platform_include/stdio.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/esp_arduino_version.h \
+C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\watchdog.cpp.o: \
+ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\watchdog.cpp \
+ C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_system/include/esp_task_wdt.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/FreeRTOS-Kernel/include/freertos/FreeRTOS.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/config/include/freertos/FreeRTOSConfig.h \
+ C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/qio_qspi/include/sdkconfig.h \
+ C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/newlib/platform_include/assert.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/config/riscv/include/freertos/FreeRTOSConfig_arch.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/FreeRTOS-Kernel/include/freertos/projdefs.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/FreeRTOS-Kernel/include/freertos/portable.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/FreeRTOS-Kernel/include/freertos/deprecated_definitions.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/FreeRTOS-Kernel/portable/riscv/include/freertos/portmacro.h \
+ C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/newlib/platform_include/stdio.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_hw_support/include/spinlock.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_hw_support/include/esp_cpu.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/soc/esp32p4/include/soc/soc_caps.h \
@@ -55,6 +56,10 @@ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\Rainto
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/FreeRTOS-Kernel/include/freertos/stream_buffer.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/FreeRTOS-Kernel/include/freertos/event_groups.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/freertos/FreeRTOS-Kernel/include/freertos/timers.h \
+ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\watchdog.h \
+ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\logger.h \
+ C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Arduino.h \
+ C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/esp_arduino_version.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/esp8266-compat.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/soc/esp32p4/register/hw_ver1/soc/gpio_reg.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/stdlib_noniso.h \
@@ -156,79 +161,4 @@ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\Rainto
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_hw_support/include/hal/cpu_ll.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/freertos_stats.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/io_pin_remap.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Arduino.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\config.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\network_local.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Ethernet\src/ETH.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Network\src/Network.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Network\src/NetworkInterface.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_netif/include/esp_netif_types.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_netif/include/esp_netif_ip_addr.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Printable.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Network\src/NetworkEvents.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_eth/include/esp_eth_driver.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_eth/include/esp_eth_com.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/hal/include/hal/eth_types.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_eth/include/esp_eth_spec.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_eth/include/esp_eth_mac_spi.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_eth/include/esp_eth_mac.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_driver_spi/include/driver/spi_master.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/hal/include/hal/spi_types.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_driver_spi/include/driver/spi_common.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_system/include/esp_ipc.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_eth/include/esp_eth_mac_esp.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_eth/include/esp_eth_phy.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/espressif__esp_wifi_remote/idf_v5.5/include/injected/esp_wifi_types.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/espressif__esp_wifi_remote/idf_v5.5/include/injected/esp_wifi_types_generic.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_hw_support/include/esp_interface.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/espressif__esp_wifi_remote/idf_v5.5/include/injected/esp_wifi_types_native.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/espressif__esp_wifi_remote/idf_v5.5/include/injected/esp_wifi_he_types.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_wifi/include/esp_smartconfig.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Network\src/NetworkManager.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/WString.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Network\src/NetworkClient.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Client.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Network\src/NetworkServer.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Server.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Network\src/NetworkUdp.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Udp.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/cbuf.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_ringbuf/include/freertos/ringbuf.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\SPI\src/SPI.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/esp32-hal-spi.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_eth/include/esp_eth.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_eth/include/esp_eth_netif_glue.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_netif/include/esp_netif.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_netif/include/esp_netif_types.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.8/include/esp_netif/include/esp_netif_defaults.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\WiFi\src/WiFi.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Print.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\WiFi\src/WiFiType.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\WiFi\src/WiFiSTA.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\WiFi\src/WiFiGeneric.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\WiFi\src/WiFiAP.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\WiFi\src/WiFiScan.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\WiFi\src/WiFiClient.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\WiFi\src/WiFiServer.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\WiFi\src/WiFiUdp.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Network\src/NetworkUdp.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\mqtt.h \
- C:\Users\Горяйнов\ Александр\Documents\Arduino\libraries\PubSubClient\src/PubSubClient.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\sensors.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\ds18b20.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\rtc.h \
- C:\Users\Горяйнов\ Александр\Documents\Arduino\libraries\RTClib\src/RTClib.h \
- C:\Users\Горяйнов\ Александр\Documents\Arduino\libraries\Adafruit_BusIO/Adafruit_I2CDevice.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\libraries\Wire\src/Wire.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/esp32-hal.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/esp32-hal-log.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/HardwareI2C.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\lighting.h \
- C:\Users\Горяйнов\ Александр\Documents\Arduino\libraries\sunset\src/sunset.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\SD.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\logger.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\ota.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\lcd.h \
- C:\Users\Горяйнов\ Александр\Documents\Arduino\libraries\LiquidCrystal_PCF8574\src/LiquidCrystal_PCF8574.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\telemetry.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\watchdog.h
+ C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/Arduino.h

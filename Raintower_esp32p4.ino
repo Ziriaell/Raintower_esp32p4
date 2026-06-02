@@ -10,6 +10,7 @@
 #include "ota.h"
 #include "lcd.h"
 #include "telemetry.h"
+#include "watchdog.h"
 
 unsigned long now_millis, lastMsg, lastResetTime = 0;
 const unsigned long resetInterval = 86400000;
@@ -55,6 +56,8 @@ void setup() {
   lcd.print("System ready");
   Serial.println("Система готова");
   logInfo("Система готова");
+  watchdog_Init();
+  logResetReason();
   Serial.println("============================================");
 }
 
@@ -101,4 +104,5 @@ void loop() {
     lastLightCheck = now_millis;
     controlLighting(now);
   }
+  watchdog_Reset();
 }

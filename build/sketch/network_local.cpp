@@ -92,7 +92,7 @@ bool waitForWifi() {
 
   while (WiFi.status() != WL_CONNECTED && attempts < 50) {
 
-    delay(400);
+    delay(250);
 
     Serial.print(".");
 
@@ -162,6 +162,7 @@ bool waitForWifi() {
 
 //   return false;
 // }
+
 // ===== МОНИТОРИНГ =====
 
 extern void mqtt_Reconnect();

@@ -198,4 +198,5 @@ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\ota.cp
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/HashBuilder.h \
  C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.8\cores\esp32/HEXBuilder.h \
  C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\ota.h \
- C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\logger.h
+ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\logger.h \
+ C:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\sketch\config.h
