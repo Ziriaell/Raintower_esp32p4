@@ -58,6 +58,8 @@
 #define NUM_READ                  30
 // Интервал обновления экрана
 #define LCD_UPDATE_INTERVAL 1000 // 1 секунда
+// Интервал задержки выключения подствеки
+#define LCD_TIMEOUT 60000
 // Интервал смены страниц на экране
 #define PAGE_SWITCH_INTERVAL 5000
 // Интервал обновления данных датчиков
@@ -73,9 +75,11 @@
 
 // ==== Задействованные пины ====
 // Пин ds18b20
-#define TEMP_SENSOR_PIN       23
+#define WATER_TEMPERATURE_SENSOR_PIN  23
 // Пин реле
 #define LIGHT_PIN             22
+// Пин сенсорной кнопки
+#define TOUCH_PIN 21
 
 // ==== Геолокация ====
 // Географическая широта (для определения времени восхода/заката)

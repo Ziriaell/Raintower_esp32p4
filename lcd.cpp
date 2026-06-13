@@ -17,6 +17,14 @@ static uint8_t currentPage = 0;
 
 static unsigned long lastPageSwitch = 0;
 
+static bool lcdEnabled = false;
+
+static unsigned long lastLcdActivity = 0;
+
+static bool lastButtonState = HIGH;
+
+static unsigned long lastButtonPress = 0;
+
 
 // ===== ДОПОЛНЕНИЕ СТРОКИ ПРОБЕЛАМИ =====
 static String padLine(String text) {
@@ -79,7 +87,7 @@ static String getUptime() {
 
   return String(buf);
 }
-
+// ===== СТРАНИЦЫ ЭКРАНА =====
 static void first_page() {
   // ===== ВРЕМЯ =====
   DateTime now = getNow();
@@ -192,8 +200,32 @@ static void third_page() {
     "SD:" + sdState + " OTA:OK"));
 }
 
-void lcd_Init() {
+static void lcd_Enable() {
 
+  lcd.setBacklight(255);
+
+  lcdEnabled = true;
+
+  lastLcdActivity = millis();
+
+  lcd.clear();
+
+  Serial.println("LCD включен");
+}
+
+static void lcd_Disable() {
+
+  lcd.clear();
+
+  lcd.setBacklight(0);
+
+  lcdEnabled = false;
+
+  Serial.println("LCD выключен");
+}
+
+void lcd_Init() {
+  pinMode(TOUCH_PIN, INPUT_PULLUP);
   Serial.println("Инициализация LCD...");
   logInfo("Инициализация LCD...");
 
@@ -219,14 +251,53 @@ void lcd_Loop() {
     return;
   }
 
-  // Обновление раз в секунду
+  // ===== КНОПКА =====
+
+  bool currentButton = digitalRead(TOUCH_PIN);
+
+  if (lastButtonState == HIGH && currentButton == LOW && millis() - lastButtonPress > 200) {
+
+    lastButtonPress = millis();
+
+    lastLcdActivity = millis();
+
+    if (!lcdEnabled) {
+
+      lcd_Enable();
+
+    } else {
+
+      lcd_Disable();
+    }
+  }
+  lastButtonState = currentButton;
+
+  // ===== ЕСЛИ LCD ВЫКЛЮЧЕН =====
+
+  if (!lcdEnabled) {
+    return;
+  }
+
+  // ===== АВТООТКЛЮЧЕНИЕ =====
+
+  if (millis() - lastLcdActivity >= LCD_TIMEOUT) {
+
+    lcd_Disable();
+
+    return;
+  }
+
+  // ===== ОБНОВЛЕНИЕ LCD =====
+
   if (millis() - lastLcdUpdate < LCD_UPDATE_INTERVAL) {
+
     return;
   }
 
   lastLcdUpdate = millis();
 
   // ===== ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ =====
+
   if (millis() - lastPageSwitch >= PAGE_SWITCH_INTERVAL) {
 
     currentPage++;
@@ -237,6 +308,8 @@ void lcd_Loop() {
 
     lastPageSwitch = millis();
   }
+
+  // ===== ОТРИСОВКА =====
 
   switch (currentPage) {
 

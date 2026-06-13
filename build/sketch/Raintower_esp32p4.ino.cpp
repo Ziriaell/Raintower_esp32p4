@@ -39,21 +39,21 @@ void setup() {
   logInfo("Система загружается");
   lcd.setCursor(0, 0);
   lcd.print("      RAINTOWER");
+  if (ETH_ENABLE) {
+    ethernet_Init();
+  }
+  lcd.setCursor(0, 1);
+  lcd.print("Ethernet started");
   WiFi.mode(WIFI_STA);
   WiFi.setAutoReconnect(true);
   WiFi.setSleep(false);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   waitForWifi();
-  lcd.setCursor(0, 1);
+  lcd.setCursor(0, 2);
   lcd.print("Wifi Started");
   rtc_Init();
   set_Rtc();
   loggerSetRTCReady(true);
-  if (ETH_ENABLE) {
-    ethernet_Init();
-  }
-  lcd.setCursor(0, 2);
-  lcd.print("Ethernet started");
   ds18b20_Init();
   sensors_Init();
   lighting_Init();
@@ -84,8 +84,6 @@ void loop() {
   // }
   if (now_millis - lastMsg > SENDING_INTERVAL_MINUTES * 60000) {
     lastMsg = now_millis;
-
-    // publishFloat("home/aeroponic/sensors/water_temperature", Water_temperature)
 
     // Reset sync flag daily
     static int previousDay = -1;

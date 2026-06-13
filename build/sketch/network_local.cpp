@@ -84,84 +84,84 @@ bool ethernet_Init() {
   return true;
 }
 
-bool waitForWifi() {
-
-  Serial.print("Проверка подключения к Wi-Fi ");
-  logInfo("Проверка подключения к Wi-Fi ");
-  uint8_t attempts = 0;
-
-  while (WiFi.status() != WL_CONNECTED && attempts < 50) {
-
-    delay(250);
-
-    Serial.print(".");
-
-    attempts++;
-  }
-
-  if (WiFi.status() == WL_CONNECTED) {
-
-    Serial.println("Подключено!");
-    logInfo("Подключено!");
-
-    return true;
-  } else {
-    Serial.println(" Не удалось подключиться.");
-    logError(" Не удалось подключиться.");
-    return false;
-  }
-}
 // bool waitForWifi() {
 
-//   static bool started = false;
-//   static unsigned long lastPrint = 0;
-//   static uint8_t attempts = 0;
+//   Serial.print("Проверка подключения к Wi-Fi ");
+//   logInfo("Проверка подключения к Wi-Fi ");
+//   uint8_t attempts = 0;
 
-//   if (WiFi.status() == WL_CONNECTED) {
+//   while (WiFi.status() != WL_CONNECTED && attempts < 50) {
 
-//     if (started) {
-
-//       Serial.println("Подключено!");
-//       logInfo("Подключено!");
-
-
-//       started = false;
-//     }
-
-//     return true;
-//   }
-
-//   if (!started) {
-
-//     Serial.print("Проверка подключения к Wi-Fi ");
-//     logInfo("Проверка подключения к Wi-Fi ");
-
-//     started = true;
-//     attempts = 0;
-//     lastPrint = millis();
-//   }
-
-//   if (millis() - lastPrint >= 250) {
+//     delay(250);
 
 //     Serial.print(".");
-
-//     lastPrint = millis();
 
 //     attempts++;
 //   }
 
-//   if (attempts >= 50) {
+//   if (WiFi.status() == WL_CONNECTED) {
 
+//     Serial.println("Подключено!");
+//     logInfo("Подключено!");
+
+//     return true;
+//   } else {
 //     Serial.println(" Не удалось подключиться.");
 //     logError(" Не удалось подключиться.");
-
-//     started = false;
-
 //     return false;
 //   }
-
-//   return false;
 // }
+bool waitForWifi() {
+
+  static bool started = false;
+  static unsigned long lastPrint = 0;
+  static uint8_t attempts = 0;
+
+  if (WiFi.status() == WL_CONNECTED) {
+
+    if (started) {
+
+      Serial.println("Подключено!");
+      logInfo("Подключено!");
+
+
+      started = false;
+    }
+
+    return true;
+  }
+
+  if (!started) {
+
+    Serial.print("Проверка подключения к Wi-Fi ");
+    logInfo("Проверка подключения к Wi-Fi ");
+
+    started = true;
+    attempts = 0;
+    lastPrint = millis();
+  }
+
+  if (millis() - lastPrint >= 250) {
+
+    Serial.print(".");
+
+    lastPrint = millis();
+
+    attempts++;
+  }
+
+  if (attempts >= 50) {
+
+    Serial.println(" Не удалось подключиться.");
+    logError(" Не удалось подключиться.");
+
+    started = false;
+
+    return false;
+  }
+
+  return false;
+}
 
 // ===== МОНИТОРИНГ =====
 

@@ -7,7 +7,7 @@
 #include "utils/Placeholder.h"
 
 // ===== НАСТРОЙКИ =====
-#define OW_PIN TEMP_SENSOR_PIN
+#define OW_PIN WATER_TEMPERATURE_SENSOR_PIN
 #define PARASITE_POWER_ARG false
 
 // ===== ONE WIRE =====
