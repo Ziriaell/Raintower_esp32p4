@@ -1,4 +1,0 @@
-c:\Users\Горяйнов\ Александр\Documents\Git\Raintower_esp32p4\build\core\idf_openthread_mpool_wrapper.c.o: \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\hardware\esp32\3.3.10\cores\esp32\idf_openthread_mpool_wrapper.c \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.10/include/soc/esp32p4/include/soc/soc_caps.h \
- C:\Users\Горяйнов\ Александр\AppData\Local\Arduino15\packages\esp32\tools\esp32p4_es-libs\3.3.10/qio_qspi/include/sdkconfig.h

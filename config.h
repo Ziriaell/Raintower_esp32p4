@@ -3,30 +3,30 @@
 
 // ==== НАСТРОЙКИ СЕТИ ====
 // ==== Ethernet ====
-#define ETH_ENABLE true
+#define ETH_ENABLE      true
 
-#define ETH_PHY_ADDR 1
-#define ETH_PHY_MDC  31
-#define ETH_PHY_MDIO 52
-#define ETH_PHY_POWER 51
-#define ETH_CLK_MODE EMAC_CLK_EXT_IN
+#define ETH_PHY_ADDR    1
+#define ETH_PHY_MDC     31
+#define ETH_PHY_MDIO    52
+#define ETH_PHY_POWER   51
+
+#define ETH_CLK_MODE    EMAC_CLK_EXT_IN
 
 // Название Wi-Fi сети (SSID)
-#define WIFI_SSID       "ASUS-WLAN" 
+#define WIFI_SSID      "ASUS-WLAN" 
 // Пароль для подключения к Wi-Fi
-#define WIFI_PASSWORD   "syicm29o"
+#define WIFI_PASSWORD  "syicm29o"
 
 // ==== SD (SDMMC 4-bit) ====
 #define SD_ENABLE true
 
 #define SD_POWER_PIN   45
-
-#define SDMMC_D0   39
-#define SDMMC_D1   40
-#define SDMMC_D2   41
-#define SDMMC_D3   42
-#define SDMMC_CMD  44
-#define SDMMC_CLK  43
+#define SDMMC_D0       39
+#define SDMMC_D1       40
+#define SDMMC_D2       41
+#define SDMMC_D3       42
+#define SDMMC_CMD      44
+#define SDMMC_CLK      43
 
 // ==== MQTT настройки ====
 // IP-адрес сервера MQTT-брокера
@@ -48,48 +48,49 @@
 
 // ==== Интервалы ====
 // Интервал отправки данных в минутах
-#define SENDING_INTERVAL_MINUTES  5
+#define SENDING_INTERVAL_MINUTES         5
 // Интервал проверки включения освещения 
-#define LIGHT_CHECK_INTERVAL 20000 //20 секунд
+#define LIGHT_CHECK_INTERVAL             20000 //20 секунд
 // Требуемое количество минут освещения в день
-#define REQUIRED_LIGHT_MINUTES    14 * 60
+#define REQUIRED_LIGHT_MINUTES           14 * 60
 // Количество измерений для усреднения значения
-#define NUM_READ                  30
+#define NUM_READ                         30
 // Интервал обновления экрана
-#define LCD_UPDATE_INTERVAL 1000 // 1 секунда
+#define LCD_UPDATE_INTERVAL              1000 // 1 секунда
 // Интервал задержки выключения подствеки
-#define LCD_TIMEOUT 60000
+#define LCD_TIMEOUT                      60000
 // Интервал смены страниц на экране
-#define PAGE_SWITCH_INTERVAL 5000
+#define PAGE_SWITCH_INTERVAL             5000
 // Интервал обновления данных датчиков
-#define SENSOR_UPDATE_INTERVAL 10000
+#define SENSOR_UPDATE_INTERVAL           10000
 
 // ==== I2C адреса ====
 // I2C адрес датчика pH
 #define PH_SENSOR_ADDRESS     0x10
-// I2C адрес датчика TDS (соли в воде)
+// I2C адрес датчика TDS 
 #define TDS_SENSOR_ADDRESS    0x11
+// I2C адрес сборки силовых ключей
+#define POWER_KEYS_ADDRESS    0x12
+// I2C адрес сборки реле
+#define RELAY_ADDRESS         0x13
 // I2C адрес экрана
-#define LCD_ADDRESS 0x27
+#define LCD_ADDRESS           0x27
 
 // ==== Задействованные пины ====
 // Пин ds18b20
 #define WATER_TEMPERATURE_SENSOR_PIN  23
-// Пин реле
-#define LIGHT_PIN             22
 // Пин сенсорной кнопки
-#define TOUCH_PIN 21
+#define TOUCH_PIN                     4
+// Пин реле
+#define LIGHT_PIN_CHANNEL             1
+
 
 // ==== Геолокация ====
 // Географическая широта (для определения времени восхода/заката)
-#define LATITUDE 52.58008244648923   // Липецк
+#define LATITUDE  52.58008244648923   // Липецк
 // Географическая долгота
 #define LONGITUDE 39.50253968208188
 // Часовой пояс относительно UTC
-#define TIMEZONE 3 
+#define TIMEZONE  3 
 
-
-// // ==== I2C шина для RTC ====
-// #define RTC_SDA  17
-// #define RTC_SCL  16
 #endif

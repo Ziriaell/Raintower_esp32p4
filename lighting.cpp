@@ -4,16 +4,25 @@
 #include "logger.h"
 #include "config.h"
 
+
 int supplementMinutes = 0;
 int lastSyncedDay = -1;
 bool lightOn = false;
 
 SunSet sun;
+iarduino_I2C_Relay POWER_KEYS(POWER_KEYS_ADDRESS);
+iarduino_I2C_Relay RELAY(RELAY_ADDRESS);
 
 void lighting_Init() {
-  pinMode(LIGHT_PIN, OUTPUT);
-  digitalWrite(LIGHT_PIN, LOW);
+  RELAY.begin();
+  POWER_KEYS.begin();
+  RELAY.digitalWrite(ALL_CHANNEL,LOW);
+  POWER_KEYS.digitalWrite(ALL_CHANNEL,LOW);  
+  // pinMode(LIGHT_PIN, OUTPUT);
+  // digitalWrite(LIGHT_PIN, LOW);
   sun.setPosition(LATITUDE, LONGITUDE, TIMEZONE);
+  Serial.println("Инициализация системы управления светом окончена");
+  logInfo("Инициализация системы управления светом окончена");
 }
 
 void calculateLightingNeeds(DateTime now) {
@@ -44,7 +53,8 @@ void controlLighting(DateTime now) {
       currentMinutes >= sunsetToday &&
       currentMinutes < (sunsetToday + supplementMinutes)) {
     if (!lightOn) {
-      digitalWrite(LIGHT_PIN, HIGH);
+      // digitalWrite(LIGHT_PIN, HIGH);
+      RELAY.digitalWrite(LIGHT_PIN_CHANNEL, HIGH);
       lightOn = true;
 
       Serial.println("Досветка включена");
@@ -54,7 +64,8 @@ void controlLighting(DateTime now) {
 
   } else {
     if (lightOn) {
-      digitalWrite(LIGHT_PIN, LOW);
+      // digitalWrite(LIGHT_PIN, LOW);
+      RELAY.digitalWrite(LIGHT_PIN_CHANNEL, LOW);
       lightOn = false;
 
       Serial.println("Досветка выключена");

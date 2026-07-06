@@ -77,9 +77,7 @@ bool ethernet_Init() {
   pinMode(ETH_PHY_POWER, OUTPUT);
   digitalWrite(ETH_PHY_POWER, HIGH);
   delay(100);
-
   ETH.begin();
-
   return true;
 }
 
@@ -110,6 +108,7 @@ bool ethernet_Init() {
 //     return false;
 //   }
 // }
+
 bool waitForWifi() {
 
   static bool started = false;

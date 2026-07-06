@@ -95,7 +95,7 @@ static void first_page() {
   char timeBuf[21];
 
   sprintf(timeBuf,
-          "%02d:%02d:%02d  %2.1fC",
+          "%02d:%02d:%02d AT:%2.1fC",
           now.hour(),
           now.minute(),
           now.second(),

@@ -1,5 +1,6 @@
 #include "mqtt.h"
 #include "logger.h"
+#include "homeassistant.h"
 
 NetworkClient network_Client;
 PubSubClient mqtt_client(network_Client);
@@ -8,7 +9,9 @@ static unsigned long lastReconnectAttempt = 0;
 
 void mqtt_Init(){
   mqtt_client.setServer(MQTT_SERVER, MQTT_PORT);
+  mqtt_client.setBufferSize(1024);
   mqtt_client.connected();
+  mqtt_client.setCallback(homeassistantCallback);
 }
 
 void mqtt_Reconnect() {
@@ -34,7 +37,7 @@ void mqtt_Reconnect() {
 
         Serial.println("Подключено");
         logInfo("MQTT подключен");
-
+        homeassistant_OnConnect();
         // подписки
         // mqtt_client.subscribe(...);
 

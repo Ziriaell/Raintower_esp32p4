@@ -11,6 +11,7 @@
 #include "lcd.h"
 #include "telemetry.h"
 #include "watchdog.h"
+#include "homeassistant.h"
 
 unsigned long now_millis, lastMsg, lastResetTime = 0;
 const unsigned long resetInterval = 86400000;
@@ -71,10 +72,6 @@ void loop() {
   lcd_Loop();
   telemetry_Loop();
 
-
-  // if (millis() - lastResetTime >= resetInterval) {
-  //   ESP.restart();
-  // }
   if (now_millis - lastMsg > SENDING_INTERVAL_MINUTES * 60000) {
     lastMsg = now_millis;
 
