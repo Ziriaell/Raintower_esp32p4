@@ -1,0 +1,17 @@
+#line 1 "C:\\Users\\Горяйнов Александр\\Documents\\Git\\Raintower_esp32p4\\.vscode\\launch.json"
+{
+    "configurations": [
+        {
+            "name": "(Windows) Запустить",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "Введите имя программы, например: ${workspaceFolder}/a.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "internalConsole"
+        }
+    ],
+    "version": "2.0.0"
+}
