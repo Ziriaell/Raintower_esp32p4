@@ -4,14 +4,13 @@
 #include "sensors.h"
 #include "ds18b20.h"
 #include "rtc.h"
-#include "lighting.h"
+#include "actuators.h"
 #include "SD.h"
 #include "logger.h"
 #include "ota.h"
 #include "lcd.h"
 #include "telemetry.h"
 #include "watchdog.h"
-#include "homeassistant.h"
 
 unsigned long now_millis, lastMsg, lastResetTime = 0;
 const unsigned long resetInterval = 86400000;
@@ -50,7 +49,7 @@ void setup() {
   loggerSetRTCReady(true);
   ds18b20_Init();
   sensors_Init();
-  lighting_Init();
+  actuators_Init();
   mqtt_Init();
   OTA_Init();
   lcd.setCursor(0, 3);
@@ -82,9 +81,9 @@ void loop() {
       lastSyncedDay = -1;
     }
     // Weekly NTP sync on Sunday
-    if (now.dayOfTheWeek() == 0 && lastSyncedDay != now.day()) {
-      Serial.println("📅 Sunday sync");
-      logInfo("Воскресная синхронизация времени");
+    if ((now.dayOfTheWeek() == 0 || now.dayOfTheWeek() == 4) && lastSyncedDay != now.day()) {
+      Serial.println("Cинхронизация времени");
+      logInfo("Cинхронизация времени");
       syncRTCwithNTP();
       lastSyncedDay = now.day();
     }

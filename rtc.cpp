@@ -40,6 +40,7 @@ bool isTimeValid() {
 void syncRTCwithNTP() {
   if (isNetworkReady()) {
     timeClient.begin();
+    updateDefaultInterface();
     if (timeClient.forceUpdate()) {
       unsigned long epochTime = timeClient.getEpochTime();
       lastNtpTime = DateTime(epochTime);
@@ -62,6 +63,7 @@ void set_Rtc() {
   if (!rtcAvailable) {
     // Initialize NTP and get initial time
     if (isNetworkReady()) {
+      updateDefaultInterface();
       timeClient.begin();
       if (timeClient.forceUpdate()) {
         lastNtpTime = DateTime(timeClient.getEpochTime());

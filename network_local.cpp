@@ -23,6 +23,16 @@ bool isNetworkReady() {
   return isWifiConnected() || isEthConnected();
 }
 
+void updateDefaultInterface() {
+  if (isEthConnected()) {
+    Network.setDefaultInterface(ETH);
+    Serial.println("Маршрут по умолчанию: Ethernet");
+  } else if (isWifiConnected()) {
+    Network.setDefaultInterface(WiFi.STA);
+    Serial.println("Маршрут по умолчанию: Wi-Fi");
+  }
+}
+
 static int getActiveInterface() {
   if (isEthConnected()) return 2;
   if (isWifiConnected()) return 1;
@@ -148,7 +158,7 @@ bool waitForWifi() {
     attempts++;
   }
 
-  if (attempts >= 50) {
+  if (attempts >= 20) {
 
     Serial.println(" Не удалось подключиться.");
     logError(" Не удалось подключиться.");
@@ -168,6 +178,16 @@ extern void mqtt_Reconnect();
 void network_Loop() {
 
   int nowIf = getActiveInterface();
+  static int lastDefaultIf = 0;
+
+  if (nowIf != 0 && nowIf != lastDefaultIf) {
+    updateDefaultInterface();
+    lastDefaultIf = nowIf;
+  }
+
+  if (nowIf == 0) {
+    lastDefaultIf = 0;
+  }
 
   if (nowIf != lastIf && lastIf != 0) {
 

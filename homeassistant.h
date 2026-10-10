@@ -3,9 +3,7 @@
 
 #include <Arduino.h>
 
-void homeassistant_Init();
 void homeassistant_OnConnect();
-
 void homeassistantCallback(char* topic,
                            uint8_t* payload,
                            unsigned int length);

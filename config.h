@@ -44,7 +44,7 @@
 // Имя устройства для OTA (обновления по воздуху)
 #define OTA_HOSTNAME    "Raintower_controller"
 // Пароль для OTA-подключения
-#define OTA_PASSWORD    "syicm29o"
+#define OTA_PASSWORD    "Aa183900"
 
 // ==== Интервалы ====
 // Интервал отправки данных в минутах

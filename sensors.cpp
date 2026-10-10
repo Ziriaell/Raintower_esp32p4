@@ -139,7 +139,7 @@ static void updateSensorData() {
   } else {
 
     // logError("Ошибка чтения pH");
-    Serial.println("Ошибка чтения pH");
+    // Serial.println("Ошибка чтения pH");
   }
 
   float ecRaw = tds.getEC();

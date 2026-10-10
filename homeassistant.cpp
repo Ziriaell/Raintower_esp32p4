@@ -1,155 +1,194 @@
-#include "mqtt.h"
-#include "logger.h"
-#include "lighting.h"
+#include <ArduinoJson.h>
+
 #include "homeassistant.h"
+#include "mqtt.h"
+#include "actuators.h"
+#include "logger.h"
 
-// ----------------------------
+// ---------- описание MQTT switch ----------
 
-static bool ledState = false;
-static bool relayState = false;
+struct HASwitch {
+  const char* name;
+  const char* uniqueId;
 
-// ==========================================================
+  const char* commandTopic;
+  const char* stateTopic;
 
-static void publishState() {
-  if (!mqtt_client.connected())
-    return;
+  uint8_t channel;
+  bool relay;
+};
 
-  mqtt_client.publish(
+// ---------- список устройств ----------
+
+static const HASwitch switches[] = {
+
+  { "PowerKey Channel 1",
+    "raintower_led1",
+    "home/aeroponic/switch/led1/set",
     "home/aeroponic/switch/led1/state",
-    ledState ? "ON" : "OFF",
-    true);
+    1, false },
 
-  mqtt_client.publish(
+  { "PowerKey Channel 2",
+    "raintower_led2",
+    "home/aeroponic/switch/led2/set",
+    "home/aeroponic/switch/led2/state",
+    2, false },
+
+  { "PowerKey Channel 3",
+    "raintower_led3",
+    "home/aeroponic/switch/led3/set",
+    "home/aeroponic/switch/led3/state",
+    3, false },
+
+  { "PowerKey Channel 4",
+    "raintower_led4",
+    "home/aeroponic/switch/led4/set",
+    "home/aeroponic/switch/led4/state",
+    4, false },
+
+  { "Relay Channel 1",
+    "raintower_relay1",
+    "home/aeroponic/switch/relay1/set",
     "home/aeroponic/switch/relay1/state",
-    relayState ? "ON" : "OFF",
-    true);
-}
+    1, true },
 
-// ==========================================================
+  { "Relay Channel 2",
+    "raintower_relay2",
+    "home/aeroponic/switch/relay2/set",
+    "home/aeroponic/switch/relay2/state",
+    2, true }
+};
 
-static void publishDiscovery() {
+constexpr uint8_t SWITCH_COUNT =
+  sizeof(switches) / sizeof(switches[0]);
+
+// ---------------------------------------------------
+
+static void publishState(const HASwitch& sw, bool state) {
   mqtt_client.publish(
-
-    "homeassistant/switch/raintower_led1/config",
-
-    R"rawliteral(
-{
-"name":"Test LED 1",
-"uniq_id":"raintower_led1",
-
-"cmd_t":"home/aeroponic/switch/led1/set",
-"stat_t":"home/aeroponic/switch/led1/state",
-
-"pl_on":"ON",
-"pl_off":"OFF",
-
-"device":{
-"ids":["raintower"],
-"name":"RainTower",
-"manufacturer":"Alexander",
-"model":"ESP32-P4"
-}
-}
-)rawliteral",
-
+    sw.stateTopic,
+    state ? "ON" : "OFF",
     true);
+}
 
-  // -----------------------------------------
+// ---------------------------------------------------
+
+static void publishAllStates() {
+  for (uint8_t i = 0; i < SWITCH_COUNT; i++) {
+    bool state;
+
+    if (switches[i].relay)
+      state = GetRelay(
+        switches[i].channel);
+    else
+      state = GetPowerKey(
+        switches[i].channel);
+
+    publishState(
+      switches[i],
+      state);
+  }
+}
+
+static void publishDiscovery(const HASwitch& sw) {
+  StaticJsonDocument<512> doc;
+
+  doc["name"] = sw.name;
+  doc["uniq_id"] = sw.uniqueId;
+
+  doc["cmd_t"] = sw.commandTopic;
+  doc["stat_t"] = sw.stateTopic;
+
+  doc["pl_on"] = "ON";
+  doc["pl_off"] = "OFF";
+
+  JsonObject device =
+    doc.createNestedObject("device");
+
+  device["ids"] = "raintower_actuators";
+  device["name"] = "RainTower Actuators";
+  device["manufacturer"] = "Alexander";
+  device["model"] = "ESP32-P4";
+
+  char topic[80];
+
+  sprintf(topic,
+          "homeassistant/switch/%s/config",
+          sw.uniqueId);
+
+  char payload[512];
+
+  serializeJson(doc, payload);
 
   mqtt_client.publish(
-
-    "homeassistant/switch/raintower_relay1/config",
-
-    R"rawliteral(
-{
-"name":"Test Relay 1",
-"uniq_id":"raintower_relay1",
-
-"cmd_t":"home/aeroponic/switch/relay1/set",
-"stat_t":"home/aeroponic/switch/relay1/state",
-
-"pl_on":"ON",
-"pl_off":"OFF",
-
-"device":{
-"ids":["raintower"],
-"name":"RainTower",
-"manufacturer":"Alexander",
-"model":"ESP32-P4"
-}
-}
-)rawliteral",
-
+    topic,
+    payload,
     true);
 }
-// ==========================================================
 
-void homeassistant_Init() {
-  POWER_KEYS.begin();
-  RELAY.begin();
+// ---------------------------------------------------
+
+static void publishAllDiscovery() {
+  for (uint8_t i = 0; i < SWITCH_COUNT; i++)
+    publishDiscovery(switches[i]);
 }
 
-// ==========================================================
+// ---------------------------------------------------
+
 
 void homeassistant_OnConnect() {
-  mqtt_client.subscribe(
-    "home/aeroponic/switch/led1/set");
+  for (uint8_t i = 0; i < SWITCH_COUNT; i++)
+    mqtt_client.subscribe(switches[i].commandTopic);
 
-  mqtt_client.subscribe(
-    "home/aeroponic/switch/relay1/set");
+  publishAllDiscovery();
 
-  static bool discoverySent = false;
-
-  if (!discoverySent) {
-    publishDiscovery();
-    discoverySent = true;
-  }
-
-  publishState();
-
-  logInfo("Home Assistant подключен");
-  Serial.println("Home Assistant подключен");
+  logInfo("Home Assistant connected");
 }
 
-// ==========================================================
+// ---------------------------------------------------
 
-void homeassistantCallback(char* topic,
-                           uint8_t* payload,
-                           unsigned int length) {
-  String msg;
+void homeassistantCallback(
+  char* topic,
+  uint8_t* payload,
+  unsigned int length) {
+  String command;
 
   for (unsigned int i = 0; i < length; i++)
-    msg += (char)payload[i];
+    command += (char)payload[i];
 
-  //----------------------------------------------------
+  bool on = (command == "ON");
 
-  if (!strcmp(topic,
-              "home/aeroponic/switch/led1/set")) {
-    ledState = (msg == "ON");
+  // Ищем описание переключателя
+  const HASwitch* sw = nullptr;
 
-    POWER_KEYS.digitalWrite(1, ledState);
+  for (uint8_t i = 0; i < SWITCH_COUNT; i++) {
 
-    mqtt_client.publish(
-      "home/aeroponic/switch/led1/state",
-      ledState ? "ON" : "OFF",
-      true);
+    if (strcmp(topic, switches[i].commandTopic) == 0) {
 
+      sw = &switches[i];
+      break;
+    }
+  }
+
+  // Такой топик нас не интересует
+  if (sw == nullptr) {
     return;
   }
 
-  //----------------------------------------------------
+  // Выполняем команду
+  if (sw->relay) {
 
-  if (!strcmp(topic,
-              "home/aeroponic/switch/relay1/set")) {
-    relayState = (msg == "ON");
+    SetRelay(
+      sw->channel,
+      on);
 
-    RELAY.digitalWrite(1, relayState);
+  } else {
 
-    mqtt_client.publish(
-      "home/aeroponic/switch/relay1/state",
-      relayState ? "ON" : "OFF",
-      true);
-
-    return;
+    SetPowerKey(
+      sw->channel,
+      on);
   }
+
+  // Отправляем подтверждение состояния
+  publishState(*sw, on);
 }

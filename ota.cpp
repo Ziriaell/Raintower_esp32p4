@@ -31,7 +31,8 @@ void OTA_Init() {
                 "OTA Progress: %u%%",
                 (progress * 100) / total);
 
-        logInfo(buf);
+        Serial.println(buf);
+        // logInfo(buf);
 
     });
 

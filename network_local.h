@@ -12,5 +12,6 @@ bool waitForWifi();
 bool isWifiConnected();
 bool isEthConnected();
 bool isNetworkReady();
+void updateDefaultInterface();
 
 #endif
