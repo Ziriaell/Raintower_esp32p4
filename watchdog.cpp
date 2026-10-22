@@ -1,5 +1,6 @@
 #include <esp_task_wdt.h>
 #include <esp_system.h>
+#include <esp_err.h>
 
 #include "watchdog.h"
 #include "logger.h"
@@ -12,11 +13,29 @@ void watchdog_Init() {
         .trigger_panic = true
     };
 
-    esp_task_wdt_init(&wdt_config);
+    // Сначала пытаемся инициализировать watchdog.
+    esp_err_t err = esp_task_wdt_init(&wdt_config);
 
-    esp_task_wdt_add(NULL);
+    // Если Arduino Core уже инициализировал TWDT,
+    // изменяем настройки существующего watchdog.
+    if (err == ESP_ERR_INVALID_STATE) {
+        err = esp_task_wdt_reconfigure(&wdt_config);
+    }
 
-    logInfo("Watchdog initialized");
+    if (err != ESP_OK) {
+        logError("Watchdog configuration failed");
+        return;
+    }
+
+    // Регистрируем текущую задачу (loopTask).
+    err = esp_task_wdt_add(NULL);
+
+    if (err != ESP_OK && err != ESP_ERR_INVALID_STATE) {
+        logError("Watchdog task registration failed");
+        return;
+    }
+
+    logInfo("Watchdog initialized: 30 seconds");
 }
 
 void watchdog_Reset() {
@@ -25,8 +44,7 @@ void watchdog_Reset() {
 
 void logResetReason() {
 
-    esp_reset_reason_t reason =
-        esp_reset_reason();
+    esp_reset_reason_t reason = esp_reset_reason();
 
     switch (reason) {
 

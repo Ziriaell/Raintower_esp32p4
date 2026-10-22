@@ -1,3 +1,7 @@
+// =====================================================================
+//  RainTower — контроллер аэропонной установки
+//  Плата: ESP32-P4-Module (ESP32-P4 + ESP32-C6 для Wi-Fi)
+// =====================================================================
 #include "config.h"
 #include "network_local.h"
 #include "mqtt.h"
@@ -20,13 +24,14 @@ unsigned long lastLightCheck = 0;
 void setup() {
   Serial.begin(115200);
   while (!Serial) {
-    delay(500);
+    delay(100);
   }
   if (SD_ENABLE) {
     if (SD_Init()) {
       logger_Init();
     }
   }
+  watchdog_Init();
   lcd_Init();
   Serial.println("Система загружается");
   logInfo("Система загружается");
@@ -56,8 +61,9 @@ void setup() {
   lcd.print("System ready");
   Serial.println("Система готова");
   logInfo("Система готова");
-  watchdog_Init();
   logResetReason();
+  Serial.printf("Wi-Fi status после waitForWifi(): %d\n",(int)WiFi.status());
+  Serial.printf("Wi-Fi IP: %s\n", WiFi.localIP().toString().c_str());
   Serial.println("============================================");
 }
 

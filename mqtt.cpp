@@ -10,6 +10,7 @@ static unsigned long lastReconnectAttempt = 0;
 void mqtt_Init(){
   mqtt_client.setServer(MQTT_SERVER, MQTT_PORT);
   mqtt_client.setBufferSize(1024);
+  mqtt_client.setSocketTimeout(5);
   mqtt_client.connected();
   mqtt_client.setCallback(homeassistantCallback);
 }

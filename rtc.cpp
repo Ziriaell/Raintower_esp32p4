@@ -16,6 +16,40 @@ static NetworkUDP ntpUDP;
 static RTC_DS3231 rtc;
 static NTPClient timeClient(ntpUDP, "pool.ntp.org", TIMEZONE * 3600);
 
+static bool isDateTimeValid(const DateTime& dt) {
+  int year = dt.year();
+  int month = dt.month();
+  int day = dt.day();
+  int hour = dt.hour();
+  int minute = dt.minute();
+  int second = dt.second();
+
+  // Отсекаем неустановленное или явно устаревшее время
+  if (year < 2025 || year > 2099) return false;
+
+  if (month < 1 || month > 12) return false;
+  if (hour < 0 || hour > 23) return false;
+  if (minute < 0 || minute > 59) return false;
+  if (second < 0 || second > 59) return false;
+
+  const int daysInMonth[] = {
+    31, 28, 31, 30, 31, 30,
+    31, 31, 30, 31, 30, 31
+  };
+
+  int maxDay = daysInMonth[month - 1];
+
+  // Проверка високосного года
+  bool leapYear =
+      (year % 4 == 0 && year % 100 != 0) ||
+      (year % 400 == 0);
+
+  if (month == 2 && leapYear) {
+    maxDay = 29;
+  }
+
+  return day >= 1 && day <= maxDay;
+}
 
 void rtc_Init() {
   if (!rtc.begin()) {

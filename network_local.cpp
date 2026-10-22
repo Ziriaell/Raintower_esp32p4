@@ -158,7 +158,7 @@ bool waitForWifi() {
     attempts++;
   }
 
-  if (attempts >= 20) {
+  if (attempts >= 100) {
 
     Serial.println(" Не удалось подключиться.");
     logError(" Не удалось подключиться.");
