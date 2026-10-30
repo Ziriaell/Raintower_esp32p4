@@ -3,16 +3,16 @@
 //  Плата: ESP32-P4-Module (ESP32-P4 + ESP32-C6 для Wi-Fi)
 // =====================================================================
 #include "config.h"
-#include "network_local.h"
-#include "mqtt.h"
-#include "sensors.h"
-#include "ds18b20.h"
-#include "rtc.h"
 #include "actuators.h"
-#include "SD.h"
-#include "logger.h"
-#include "ota.h"
+#include "ds18b20.h"
 #include "lcd.h"
+#include "logger.h"
+#include "mqtt.h"
+#include "network_local.h"
+#include "ota.h"
+#include "rtc.h"
+#include "SD.h"
+#include "sensors.h"
 #include "telemetry.h"
 #include "watchdog.h"
 
@@ -76,33 +76,26 @@ void loop() {
   OTA_Loop();
   lcd_Loop();
   telemetry_Loop();
+  actuators_Loop(now);
 
   if (now_millis - lastMsg > SENDING_INTERVAL_MINUTES * 60000) {
     lastMsg = now_millis;
 
-    // Reset sync flag daily
     static int previousDay = -1;
     if (now.day() != previousDay) {
       previousDay = now.day();
       lastSyncedDay = -1;
     }
-    // Weekly NTP sync on Sunday
-    if ((now.dayOfTheWeek() == 0 || now.dayOfTheWeek() == 4) && lastSyncedDay != now.day()) {
+
+    if ((now.dayOfTheWeek() == 0 ||
+         now.dayOfTheWeek() == 4) &&
+        lastSyncedDay != now.day()) {
+
       Serial.println("Cинхронизация времени");
-      logInfo("Cинхронизация времени");
+      logInfo("Синхронизация времени");
       syncRTCwithNTP();
       lastSyncedDay = now.day();
     }
-    // Daily sunrise/sunset calculations
-    static int lastDay = -1;
-    if (now.day() != lastDay) {
-      lastDay = now.day();
-      calculateLightingNeeds(now);
-    }
-  }
-  if (now_millis - lastLightCheck > LIGHT_CHECK_INTERVAL) {
-    lastLightCheck = now_millis;
-    controlLighting(now);
   }
   watchdog_Reset();
 }

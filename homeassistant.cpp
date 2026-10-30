@@ -105,9 +105,9 @@ static void publishDiscovery(const HASwitch& sw) {
   JsonObject device =
     doc.createNestedObject("device");
 
-  device["ids"] = "raintower_actuators";
-  device["name"] = "RainTower Actuators";
-  device["manufacturer"] = "Alexander";
+  device["ids"] = "raintower_controller";
+  device["name"] = "RainTower";
+  device["manufacturer"] = "DIY";
   device["model"] = "ESP32-P4";
 
   char topic[80];

@@ -136,11 +136,11 @@ static void updateSensorData() {
 
     PH = medianPH.update(phRaw);
 
-  } else {
+  } // else {
 
-    // logError("Ошибка чтения pH");
-    // Serial.println("Ошибка чтения pH");
-  }
+  //   logError("Ошибка чтения pH");
+  //   Serial.println("Ошибка чтения pH");
+  // }
 
   float ecRaw = tds.getEC();
 

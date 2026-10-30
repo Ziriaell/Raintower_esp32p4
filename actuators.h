@@ -7,10 +7,8 @@
 extern int lastSyncedDay;
 extern SunSet sun;
 
-// extern iarduino_I2C_Relay POWER_KEYS;
-// extern iarduino_I2C_Relay RELAY;
-
 void actuators_Init();
+void actuators_Loop(DateTime now);
 void calculateLightingNeeds(DateTime now);
 void controlLighting(DateTime now);
 
